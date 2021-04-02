@@ -31,17 +31,16 @@ func main() {
 		fmt.Scanln(&eleccion)
 		switch eleccion {
 		case 1:
-			_ = CRUD.MenuListar()
-		case 2:
 			_ = CRUD.MenuInsertar()
-
-			/*
+		case 2:
+			_ = CRUD.MenuListar()
 
 		case 3:
 			_ = CRUD.MenuActualizar()
+
 		case 4:
 			_ = CRUD.MenuElimnar()
-		*/
+
 		}
 	}
 

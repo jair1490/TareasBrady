@@ -1,5 +1,5 @@
 package CRUD
-/*
+
 import (
 	"GoProject/BasedeDatos"
 	"bufio"
@@ -7,10 +7,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"os"
 )
-
- */
-
-/*
 
 func MenuActualizar() (e error){
 
@@ -55,4 +51,3 @@ func MenuActualizar() (e error){
 	return e
 }
 
- */

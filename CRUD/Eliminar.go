@@ -1,6 +1,6 @@
 package CRUD
 
-/*
+
 import (
 	"GoProject/BasedeDatos"
 	"bufio"
@@ -41,7 +41,7 @@ func MenuElimnar() (e error) {
 
 	if (respuesta == "S") {
 
-		nil := BasedeDatos.Eliminar(c.Nombre)
+		nil := BasedeDatos.Eliminar(c)
 		if err != nil {
 			fmt.Printf("Error Eliminado: %v", err)
 		} else {
@@ -53,4 +53,3 @@ func MenuElimnar() (e error) {
 	return err
 }
 
- */

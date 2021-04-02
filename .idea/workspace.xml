@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f1bb7b9f-fe92-4b96-90f0-21b5260d65ea" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BasedeDatos/BaseDeDatos.go" beforeDir="false" afterPath="$PROJECT_DIR$/BasedeDatos/BaseDeDatos.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRUD/Actualizar.go" beforeDir="false" afterPath="$PROJECT_DIR$/CRUD/Actualizar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRUD/Eliminar.go" beforeDir="false" afterPath="$PROJECT_DIR$/CRUD/Eliminar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRUD/Insertar.go" beforeDir="false" afterPath="$PROJECT_DIR$/CRUD/Insertar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRUD/Listar.go" beforeDir="false" afterPath="$PROJECT_DIR$/CRUD/Listar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/menu.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,5 +70,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

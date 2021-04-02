@@ -13,11 +13,11 @@ func MenuListar() (e error) {
 		fmt.Printf("Error obteniendo contactos: %v", err)
 	} else {
 		fmt.Println("======Lista de Libros=========")
-		for _, Libro := range libros {
-			//fmt.Printf("Idlibro: %d\n", Libro.Idlibro)
-			fmt.Printf("Nombre: %s\n", Libro.Nombre)
-			fmt.Printf("Autor: %s\n", Libro.Autor)
-			fmt.Printf("Editorial: %s\n", Libro.Editorial)
+		for _, libro := range libros {
+			fmt.Printf("id: %d\n", libro.Id)
+			fmt.Printf("Nombre: %s\n", libro.Nombre)
+			fmt.Printf("Autor: %s\n", libro.Autor)
+			fmt.Printf("Editorial: %s\n", libro.Editorial)
 			fmt.Println("-----------------------------------")
 		}
 	}

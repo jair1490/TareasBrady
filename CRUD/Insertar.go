@@ -12,6 +12,7 @@ import (
 func MenuInsertar() (e error) {
 
 	var c BasedeDatos.Libro
+	var respuesta string
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Print("========Insertar un nuevo libro======= \n")
@@ -20,22 +21,12 @@ func MenuInsertar() (e error) {
 	if scanner.Scan() {
 		c.Nombre = scanner.Text()
 	}
-	fmt.Print("Ingrese su Autor: ")
-	if scanner.Scan() {
-		c.Autor = scanner.Text()
-	}
 
-	fmt.Print("Ingrese su Editorial :")
-	if scanner.Scan() {
-		c.Editorial = scanner.Text()
-	}
-
-	/*
-	libros, err := BasedeDatos.Buscar(c.Nombre)
+	libros, err := BasedeDatos.Buscar(c)
 	if err != nil {
 		fmt.Printf("Error obteniendo contactos: %v", err)
 	} else {
-		fmt.Println("======Lista de Libros=========")
+		//fmt.Println("======Lista de Libros=========")
 		for _, Libro := range libros {
 			fmt.Printf("Nombre: %s\n", Libro.Nombre)
 			fmt.Printf("Autor: %s\n", Libro.Autor)
@@ -44,11 +35,17 @@ func MenuInsertar() (e error) {
 
 		}
 
-	 */
+	 	if (len(libros) <= 0) {
 
-		//if (len(libros) <= 0) {
+			fmt.Print("Ingrese su Autor: ")
+			if scanner.Scan() {
+				c.Autor = scanner.Text()
+			}
 
-			var respuesta string
+			fmt.Print("Ingrese su Editorial :")
+			if scanner.Scan() {
+				c.Editorial = scanner.Text()
+			}
 
 			fmt.Print("Estas seguro de insertar este libro (S/N) :")
 			if scanner.Scan() {
@@ -65,11 +62,11 @@ func MenuInsertar() (e error) {
 				}
 			}
 
-			//}else {
-			//fmt.Printf("El registro ya existe en la base de datos: \n")
-		//}
+			}else {
+			fmt.Printf("El registro ya existe en la base de datos: \n")
+		}
 
-	//}
+	}
 
 	return e
 }

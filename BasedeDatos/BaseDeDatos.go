@@ -4,7 +4,8 @@ import (
 	//"database/sql"
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"log"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	//_ "github.com/go-sql-driver/mysql"
 )
 
 func ObtenerBaseDeDatos() (*gorm.DB, error)  {
@@ -20,12 +21,11 @@ func ObtenerBaseDeDatos() (*gorm.DB, error)  {
 }
 
 type Libro struct {
-	//Idlibro int
-	Nombre string
-	Autor string
+	Id        int	`gorm:"primary_key,AUTO_INCREMENT"`
+	Nombre    string
+	Autor     string
 	Editorial string
 }
-
 
 func (libro *Libro) TableName() string {
 	return "libro"
@@ -37,30 +37,12 @@ func ObtenerLibro() ([]Libro, error) {
 		return nil, err
 	}
 
-	defer db.Close()
-
 	var libros []Libro
-
 	db.Find(&libros)
-
-	log.Print(&libros)
-
-	if err != nil {
-		return nil, err
-	}
-
-	/*var c Libro
-
-	for libros.Next() {
-		err = var libros.Scan(&c.Nombre, &c.Autor, &c.Editorial)
-		if err != nil {
-			return nil, err
-		}
-		var libros = append(var libros, c)
-	}*/
-
+	
 	return libros, nil
 }
+
 
 func Insertar(c Libro) (e error) {
 	db, err := ObtenerBaseDeDatos()
@@ -68,7 +50,7 @@ func Insertar(c Libro) (e error) {
 		return err
 	}
 	defer db.Close()
-	db.Create(c)
+	db.Create(&c)
 	if err != nil {
 		return err
 	}
@@ -79,87 +61,6 @@ func Insertar(c Libro) (e error) {
 	return nil
 }
 
-
-/*
-func BuscarLibro(nombre string) ([]Libro, error) {
-	libros := []Libro{}
-	db, err := ObtenerBaseDeDatos()
-	if err != nil {
-		return nil, err
-	}
-
-	defer db.Close()
-
-	filas, err := db.Query("SELECT Nombre,Autor,Editorial FROM libro where Nombre like  ?",nombre + "%")
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer filas.Close()
-
-	var c Libro
-
-	for filas.Next() {
-		err = filas.Scan(&c.Nombre,&c.Autor,&c.Editorial)
-		if err != nil {
-			return nil, err
-		}
-		libros = append(libros, c)
-	}
-
-	return libros, nil
-}
-
-func Eliminar(nombre string) error {
-	db, err := ObtenerBaseDeDatos()
-	if err != nil {
-		return err
-	}
-	defer db.Close()
-
-	sentenciaPreparada, err := db.Query("DELETE FROM libro WHERE Nombre = ?",nombre)
-	if err != nil {
-		return err
-	}
-	defer sentenciaPreparada.Close()
-
-	if err != nil {
-		return err
-	}
-	return err
-}
-
-func Buscar(nombre string) ([]Libro, error) {
-	libros := []Libro{}
-	db, err := ObtenerBaseDeDatos()
-	if err != nil {
-		return nil, err
-	}
-
-	defer db.Close()
-
-	filas, err := db.Query("SELECT Nombre,Autor,Editorial FROM libro where Nombre =  ?",nombre)
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer filas.Close()
-
-	var c Libro
-
-	for filas.Next() {
-		err = filas.Scan(&c.Nombre,&c.Autor,&c.Editorial)
-		if err != nil {
-			return nil, err
-		}
-		libros = append(libros, c)
-	}
-
-	return libros, nil
-}
-
 func Actualizar(c Libro) error {
 	db, err := ObtenerBaseDeDatos()
 	if err != nil {
@@ -167,13 +68,88 @@ func Actualizar(c Libro) error {
 	}
 	defer db.Close()
 
-	sentenciaPreparada, err := db.Prepare("UPDATE libro SET Autor = ?, Editorial = ? WHERE Nombre = ?")
+	db.Model (Libro {}).Where("Nombre =?", c.Nombre).Updates(Libro {Autor: c.Autor , Editorial: c.Editorial })
+
 	if err != nil {
 		return err
 	}
-	defer sentenciaPreparada.Close()
-		_, err = sentenciaPreparada.Exec(c.Autor, c.Editorial, c.Nombre)
+
 	return err
 
 }
+
+func Eliminar(c Libro) error {
+	db, err := ObtenerBaseDeDatos()
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+
+	db.Where("nombre = ?", c.Nombre).Delete(&c)
+	if err != nil {
+		return err
+	}
+
+
+	if err != nil {
+		return err
+	}
+	return err
+}
+
+func Buscar(c Libro) ([]Libro, error) {
+	libros := []Libro{}
+	db, err := ObtenerBaseDeDatos()
+	if err != nil {
+		return nil, err
+	}
+
+	defer db.Close()
+
+	db.Where("nombre = ?", c.Nombre).First(&libros)
+	if err != nil {
+		return nil, err
+	}
+
+	return libros, nil
+}
+
+
+
+
+
+/*
+
+func BuscarLibro(c Libro) ([]Libro, error) {
+	libros := []Libro{}
+	db, err := ObtenerBaseDeDatos()
+	if err != nil {
+		return nil, err
+	}
+
+	defer db.Close()
+
+	//filas, err := db.Query("SELECT Nombre,Autor,Editorial FROM libro where Nombre like  ?",nombre + "%")
+	db.Where("nombre LIKE ?", c.Nombre).Find(&libros)
+
+	if err != nil {
+		return nil, err
+	}
+
+	//defer filas.Close()
+
+	//var c Libro
+
+	/*for filas.Next() {
+		err = filas.Scan(&c.Nombre,&c.Autor,&c.Editorial)
+		if err != nil {
+			return nil, err
+		}
+		libros = append(libros, c)
+	}
+
+return libros, nil
+}
+
  */
